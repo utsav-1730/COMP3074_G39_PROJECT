@@ -26,7 +26,7 @@ const Details = ({ route }) => {
   const [newComment, setNewComment] = useState('');
   const [newRating, setNewRating] = useState(0);
   const [reviews, setReviews] = useState([
-    { id: 1, name: 'John Doe', rating: 4, comment: 'Amazing food and ambiance!' },
+    { id: 1, name: 'Utsav Changani', rating: 4, comment: 'Amazing food and ambiance!' },
     { id: 2, name: 'Jane Smith', rating: 5, comment: 'Best restaurant in town!' },
     { id: 3, name: 'Alice Brown', rating: 3, comment: 'Good food but service was slow.' },
   ]);
