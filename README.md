@@ -41,4 +41,4 @@ This project is a beautifully designed Restaurant Finder application built using
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repo-url.git
+   git clone https://github.com/your-repo-url.git](https://github.com/utsav-1730/COMP3074_G39_PROJECT.git
