@@ -1,6 +1,13 @@
-// SharePost.js
 import React from 'react';
-import { View, ImageBackground, TouchableOpacity, StyleSheet, Text, Linking } from 'react-native';
+import {
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Linking,
+  Alert,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -12,14 +19,31 @@ const SharePost = () => {
   };
 
   const handleShare = (platform) => {
-    // Simulate sharing functionality
     let url = '';
-    if (platform === 'facebook') {
-      url = 'https://www.facebook.com/sharer/sharer.php?u=yoururl.com';
-    } else if (platform === 'twitter') {
-      url = 'https://twitter.com/intent/tweet?url=yoururl.com&text=Check this out!';
+    switch (platform) {
+      case 'facebook':
+        url = 'https://www.facebook.com/sharer/sharer.php?u=yoururl.com';
+        break;
+      case 'twitter':
+        url = 'https://twitter.com/intent/tweet?url=yoururl.com&text=Check this out!';
+        break;
+      case 'whatsapp':
+        url = 'https://api.whatsapp.com/send?text=Check%20this%20out:%20yoururl.com';
+        break;
+      case 'instagram':
+        Alert.alert(
+          'Instagram Sharing',
+          'Instagram does not support direct sharing via URL. Please copy the link manually.'
+        );
+        return;
+      default:
+        Alert.alert('Error', 'Sharing platform not supported.');
+        return;
     }
-    Linking.openURL(url);
+
+    Linking.openURL(url).catch(() =>
+      Alert.alert('Error', 'Unable to open the sharing link.')
+    );
   };
 
   return (
@@ -29,25 +53,42 @@ const SharePost = () => {
     >
       <View style={styles.overlay}>
         <Text style={styles.titleText}>Share Post</Text>
+        <Text style={styles.descriptionText}>
+          Choose your favorite social media platform
+        </Text>
 
-        <Text style={styles.descriptionText}>Choose your social media platform</Text>
-
-        {/* Icons for Facebook and Twitter */}
+        {/* Icons for sharing platforms */}
         <View style={styles.iconContainer}>
           <TouchableOpacity
             style={styles.iconButton}
             onPress={() => handleShare('facebook')}
           >
-            <Icon name="facebook" size={60} color="#fff" />
+            <Icon name="facebook" size={50} color="#3b5998" />
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.iconButton}
             onPress={() => handleShare('twitter')}
           >
-            <Icon name="twitter" size={60} color="#fff" />
+            <Icon name="twitter" size={50} color="#00acee" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => handleShare('whatsapp')}
+          >
+            <Icon name="whatsapp" size={50} color="#25D366" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => handleShare('instagram')}
+          >
+            <Icon name="instagram" size={50} color="#C13584" />
           </TouchableOpacity>
         </View>
 
+        {/* Back Button */}
         <TouchableOpacity style={styles.backButton} onPress={handleBackToDetails}>
           <Text style={styles.buttonText}>Back to Details</Text>
         </TouchableOpacity>
@@ -62,45 +103,53 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Darker overlay for better contrast
+    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Darker overlay for better readability
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
   },
   titleText: {
-    fontSize: 32, // Increased font size
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
     color: '#fff',
   },
   descriptionText: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     marginBottom: 24,
     color: '#fff',
   },
   iconContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around', // Evenly distribute icons
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
     width: '100%',
     marginBottom: 32,
   },
   iconButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Semi-transparent background
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Semi-transparent background
     borderRadius: 50,
+    padding: 15,
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 5,
   },
   backButton: {
     backgroundColor: '#3498db',
-    paddingVertical: 15,
+    paddingVertical: 12,
     paddingHorizontal: 40,
-    borderRadius: 30,
-    elevation: 5, // Add shadow effect
+    borderRadius: 25,
+    marginTop: 20,
+    elevation: 8, // Add shadow effect
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

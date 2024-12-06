@@ -1,4 +1,3 @@
-// About.js
 import React from 'react';
 import {
   View,
@@ -39,7 +38,9 @@ const About = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {students.map((student, index) => (
             <View key={index} style={styles.studentCard}>
-              <Icon name="person-circle-outline" size={50} color="#fff" />
+              <View style={styles.iconContainer}>
+                <Icon name="person-circle-outline" size={60} color="#3498db" />
+              </View>
               <View style={styles.studentInfo}>
                 <Text style={styles.studentName}>{student.name}</Text>
                 <Text style={styles.studentId}>ID: {student.studentId}</Text>
@@ -50,6 +51,7 @@ const About = () => {
 
         {/* Back Button */}
         <TouchableOpacity style={styles.backButton} onPress={handleBackToDetails}>
+          <Icon name="arrow-back" size={20} color="#fff" style={styles.buttonIcon} />
           <Text style={styles.buttonText}>Back to Main Screen</Text>
         </TouchableOpacity>
       </View>
@@ -62,19 +64,24 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
+    resizeMode: 'cover',
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark overlay for contrast
+    backgroundColor: 'rgba(0, 0, 0, 0.85)', // Slightly darker overlay for better readability
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
   titleText: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 30,
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   scrollContainer: {
     alignItems: 'center',
@@ -86,8 +93,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     width: width * 0.9,
     padding: 20,
-    borderRadius: 15,
+    borderRadius: 20,
     marginBottom: 20,
+    elevation: 3, // Shadow effect for Android
+    shadowColor: '#000', // Shadow effect for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  iconContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 50,
+    padding: 10,
   },
   studentInfo: {
     marginLeft: 20,
@@ -97,23 +114,38 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   studentId: {
     fontSize: 18,
-    color: '#fff',
+    color: '#ddd',
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   backButton: {
     backgroundColor: '#e74c3c',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 30,
     elevation: 5,
     marginTop: 10,
   },
+  buttonIcon: {
+    marginRight: 8,
+  },
   buttonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
 });
 
