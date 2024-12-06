@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.85)', // Slightly darker overlay for better readability
+    backgroundColor: 'rgba(0, 0, 0, 0.85)', 
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingHorizontal: 20,
     alignItems: 'center',
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     marginBottom: 20,
-    elevation: 3, // Shadow effect for Android
-    shadowColor: '#000', // Shadow effect for iOS
+    elevation: 3, 
+    shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
